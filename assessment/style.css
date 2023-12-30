@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #1a1a1a;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  width: 100%;
+  max-width: 500px;
+  background-color: #353535;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(64, 64, 64, 0.2);
+  color: #e3e3e3;
+}
+
+.search-box {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#dictionaryForm > input {
+  all: unset;
+  padding: 10px;
+  border: none;
+  background-color: #0a0a0a73;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#dictionaryForm > input:focus {
+  background-color: #0a0a0ab6;
+}
+
+#dictionaryForm > button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: rgb(81, 81, 248);
+  color: #fff;
+  cursor: pointer;
+}
+
+.search-answer {
+  padding: 20px;
+}
+
+.search-answer > h2 {
+  margin-bottom: 20px;
+}
+
+.search-answer > ol {
+  margin-left: 20px;
+}
