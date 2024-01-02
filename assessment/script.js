@@ -1,7 +1,8 @@
 let dictionaryFormDOM = document.querySelector("#dictionaryForm");
 let searchWordDOM = document.querySelector("#searchWord");
-let definitionsDOM = document.querySelector("#definitions");
+let meaningsDOM = document.querySelector("#meanings");
 let audioDOM = document.querySelector("#audio");
+let upperBoxDOM = document.querySelector("#upperBox");
 let loadingDOM = document.querySelector("#loading");
 
 async function formSubmitted(event) {
@@ -18,32 +19,59 @@ async function formSubmitted(event) {
   loadingDOM.style.display = "block";
   // clear the previous results;
   // delete all the children of orderedListDOM
-  definitionsDOM.replaceChildren();
-
-  // fetchAudio(word).then(function (data) {
-  //   let arrayAudio = data[0].phonetics;
-  //   console.log(arrayAudio);
-
-  //   for
-  // });
+  audioDOM.replaceChildren();
+  meaningsDOM.replaceChildren();
 
   fetchDefinition(word)
     .then(function (data) {
       // handle resolve
       let arrayMeanings = data[0].meanings;
-      console.log(arrayMeanings);
-      // loop through the meanings
-      for (let i = 0; i < arrayMeanings.length; i++) {
-        let newLiDom = document.createElement("li");
-        newLiDom.innerText = arrayMeanings[i].definitions[0].definition;
-        definitionsDOM.appendChild(newLiDom);
+      let arrayAudio = data[0].phonetics;
+      console.log(arrayAudio);
+
+      for (i = 0; i < arrayAudio.length; i++) {
+        let newLiDOM = document.createElement("div");
+        let newAudioDOM = document.createElement("audio");
+        let audioURL = arrayAudio[i].audio;
+        console.log(audioURL);
+        if (audioURL == "" || audioURL == null) {
+          console.log("no audio URL");
+        } else {
+          newAudioDOM.setAttribute("src", audioURL);
+          newAudioDOM.setAttribute("controls", "controls");
+          newLiDOM.appendChild(newAudioDOM);
+          audioDOM.appendChild(newLiDOM);
+        }
       }
+
+      for (let i = 0; i < arrayMeanings.length; i++) {
+        let newPOS = document.createElement("h3");
+        newPOS.innerText = arrayMeanings[i].partOfSpeech;
+        meaningsDOM.appendChild(newPOS);
+
+        let newOlDOM = document.createElement("ol");
+        meaningsDOM.appendChild(newOlDOM);
+
+        let arrayDefinitions = data[0].meanings[i].definitions;
+        console.log(arrayDefinitions);
+
+        for (let i = 0; i < arrayDefinitions.length; i++) {
+          let newLiDOM = document.createElement("li");
+          newLiDOM.innerText = arrayDefinitions[i].definition;
+          newOlDOM.appendChild(newLiDOM);
+        }
+      }
+
+      // loop through the meanings
+
       // loading state stop
       loadingDOM.style.display = "none";
     })
     .catch(function (error) {
       // handle reject
       console.log("error", error);
+      searchWordDOM.innerText = "error: word not found";
+      loadingDOM.style.display = "none";
     });
 
   // clear the input field

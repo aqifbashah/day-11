@@ -16,21 +16,22 @@ body {
 
 main {
   width: 100%;
-  max-width: 500px;
+  max-width: 60%;
   background-color: #353535;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(64, 64, 64, 0.2);
   color: #e3e3e3;
+  padding: 20px;
 }
 
 .search-box {
-  padding: 20px;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-#dictionaryForm > input {
+.search-box > form > input {
   all: unset;
   padding: 10px;
   border: none;
@@ -39,11 +40,11 @@ main {
   font-size: 16px;
 }
 
-#dictionaryForm > input:focus {
+.search-box > form > input:focus {
   background-color: #0a0a0ab6;
 }
 
-#dictionaryForm > button {
+.search-box > form > button {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -54,13 +55,39 @@ main {
 }
 
 .search-answer {
-  padding: 20px;
+  padding: 10px 50px;
 }
 
 .search-answer > h2 {
   margin-bottom: 20px;
 }
 
-.search-answer > ol {
-  margin-left: 20px;
+.meanings {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 10px;
+}
+
+.meanings > ol {
+  padding: 0 30px;
+}
+
+.loader {
+  margin: auto;
+  border: 10px solid #eaf0f6;
+  border-radius: 50%;
+  border-top: 10px solid #596cff;
+  width: 70px;
+  height: 70px;
+  animation: spinner 0.5s linear infinite;
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
